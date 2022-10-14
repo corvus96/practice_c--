@@ -44,7 +44,11 @@ int main (int argc, char* argv[])
     SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, 0);
     double angle = 0;
     Arm arm1(400, 300, 200, angle);
-    Arm arm2(arm1.GetEndX(), arm1.GetEndY(), 100, angle);
+    Arm arm2(arm1.GetEndX(), arm1.GetEndY(), 100, 1.3);
+    Arm arm3(arm2.GetEndX(), arm2.GetEndY(), 120, 1.3);
+    arm2.parent = &arm1;
+    arm3.parent = &arm2;
+    
     uint8_t armColor[4] = {26, 150, 255, 255};
     // ----- Game loop
     bool quit = false;
@@ -60,16 +64,20 @@ int main (int argc, char* argv[])
             }
         }
 
-        // HERE
-        arm1.Render(renderer, armColor);
-        arm2.Render(renderer, armColor);
-        arm1.angle = sin(angle)*1.2;
-        arm2.x = arm1.GetEndX();
-        arm2.y = arm1.GetEndY();
-        angle += 0.0005;
         /*
             do drawing here
         */
+        arm1.Render(renderer, armColor);
+        arm2.Render(renderer, armColor);
+        arm3.Render(renderer, armColor);
+        arm1.angle = sin(angle)*1.2;
+        arm2.angle = cos(angle * 0.9) * 0.92;
+        arm3.angle = sin(angle * 1.1) * 1.34;
+        arm2.x = arm1.GetEndX();
+        arm2.y = arm1.GetEndY();
+        arm3.x = arm2.GetEndX();
+        arm3.y = arm2.GetEndY();
+        angle += 0.0005;
         SDL_GL_SwapWindow(window);
     }
 

@@ -9,6 +9,7 @@ class Arm {
     double y;
     double length;
     double angle;
+    Arm *parent = NULL;
     Arm(double x, double y, double length, double angle){
         this->x = x;
         this->y = y;

@@ -1,11 +1,23 @@
 #include "./include/arm.hpp"
 
 double Arm::GetEndX(){
-    return this->x + cos(this->angle) * this->length;
+    double angle = this->angle;
+    Arm* parent = this->parent;
+    while(parent){
+        angle += parent->angle;
+        parent = parent->parent;
+    }
+    return this->x + cos(angle) * this->length;
 }
 
 double Arm::GetEndY(){
-    return this->y + sin(this->angle) * this->length;
+    double angle = this->angle;
+    Arm* parent = this->parent;
+    while(parent){
+        angle += parent->angle;
+        parent = parent->parent;
+    }
+    return this->y + sin(angle) * this->length;
 }
 
 void Arm::Render(SDL_Renderer * renderer, uint8_t rgba_color[]){
