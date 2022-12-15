@@ -43,12 +43,12 @@ int main (int argc, char* argv[])
     
     SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, 0);
     double angle = 0;
-    Arm arm1(400, 300, 200, angle);
+    Arm arm1(SCREEN_SIZE_X / 2, SCREEN_SIZE_Y / 2, 100, 0);
     Arm arm2(arm1.GetEndX(), arm1.GetEndY(), 100, 1.3);
     Arm arm3(arm2.GetEndX(), arm2.GetEndY(), 120, 1.3);
     arm2.parent = &arm1;
     arm3.parent = &arm2;
-    
+
     uint8_t armColor[4] = {26, 150, 255, 255};
     // ----- Game loop
     bool quit = false;
